@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-phoneinfoga-app
+  name: demo-phoneinfoga-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: demo-phoneinfoga-app
+  template:
+    metadata:
+      labels:
+        app: demo-phoneinfoga-app
+    spec:
+      containers:
+        - image: sha256:2f7935edd47454da2f63091303535d8b3d6701754392b72ecd2a94f68c012ea8
+          args:
+            - serve
+          name: demo-phoneinfoga-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: http
